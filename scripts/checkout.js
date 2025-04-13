@@ -5,13 +5,23 @@ import {loadCart} from '../data/cart.js';
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 async function loadPage(){
-  
-  await loadProductsFetch();
-  const value = await new Promise((resolve)=>{
+  try{
+    //throw 'error1';
+    await loadProductsFetch();
+  const value = await new Promise((resolve, reject)=>{
+    //throw 'error2';
     loadCart(()=>{
-      resolve();
+      //reject('error3');
+      resolve('value3');
     });
   });
+
+  } catch(error){
+    console.log('unexpected error. Please try again later. Problem loading getting the backend products');
+
+  }
+  
+  
   renderOrderSummary();
   renderPaymentSummary();
   
